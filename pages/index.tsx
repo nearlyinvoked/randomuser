@@ -5,6 +5,8 @@ import axios from "axios";
 import Moment from "react-moment";
 
 import { Data } from "./api/users";
+import IconSort from "../components/IconSort";
+import IconSearch from "../components/IconSearch";
 
 const Home: NextPage = () => {
   const [users, setUsers] = useState<Data[]>([]);
@@ -33,7 +35,7 @@ const Home: NextPage = () => {
     setFilterData(filterData);
   };
 
-  const handleFilterGender = (gender: string) => {
+  const handleFilterGender = async (gender: string) => {
     setSelect(gender);
     setFilter(true);
     let filterGender = users.filter((item) => item.gender == gender);
@@ -47,6 +49,9 @@ const Home: NextPage = () => {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await axios.get("/api/users");
+      // const data = response.data.results.sort((a: Data, b: Data) =>
+      //   a.name.first.localeCompare(b.name.first)
+      // );
       setUsers(response.data.results);
     };
     fetchUsers();
@@ -77,20 +82,7 @@ const Home: NextPage = () => {
                 className="btn-search ml-1"
                 onClick={() => handleSearch()}
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                  />
-                </svg>
+                <IconSearch />
               </button>
             </div>
           </div>
@@ -121,9 +113,24 @@ const Home: NextPage = () => {
         <table className="table-auto">
           <thead>
             <tr>
-              <th className="bg-gray-300">Username</th>
-              <th className="bg-gray-300">Name</th>
-              <th className="bg-gray-300">Email</th>
+              <th className="bg-gray-300">
+                Username{" "}
+                <button>
+                  <IconSort />
+                </button>
+              </th>
+              <th className="bg-gray-300">
+                Name{" "}
+                <button>
+                  <IconSort />
+                </button>
+              </th>
+              <th className="bg-gray-300">
+                Email{" "}
+                <button>
+                  <IconSort />
+                </button>
+              </th>
               <th className="bg-gray-300">Gender</th>
               <th className="bg-gray-300">Date</th>
             </tr>

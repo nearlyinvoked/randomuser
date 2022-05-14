@@ -1,6 +1,6 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from "next";
-import axios, { AxiosError, AxiosResponseHeaders } from "axios";
+import axios from "axios";
 
 export type Data = {
   gender: string;
@@ -26,7 +26,7 @@ export default async function handler(
 ) {
   try {
     const response: any = await axios.get<Data[]>(
-      "https://randomuser.me/api/?results=100"
+      "https://randomuser.me/api/?results=100&seed=foobar"
     );
     res.status(200).json(response.data);
   } catch (error: any) {
