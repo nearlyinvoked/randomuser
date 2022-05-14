@@ -12,6 +12,8 @@ const Home: NextPage = () => {
   const [filterData, setFilterData] = useState<Data[]>([]);
   const [filter, setFilter] = useState<boolean>(false);
 
+  const [select, setSelect] = useState("");
+
   const [search, setSearch] = useState<string>("");
 
   const handleSearch = () => {
@@ -29,6 +31,13 @@ const Home: NextPage = () => {
     let filterData = filterUsername.concat(filterName).concat(filterEmail);
 
     setFilterData(filterData);
+  };
+
+  const handleFilterGender = (gender: string) => {
+    setSelect(gender);
+    setFilter(true);
+    let filterGender = users.filter((item) => item.gender == gender);
+    setFilterData(filterGender);
   };
 
   const handleResetFilter = () => {
@@ -87,7 +96,13 @@ const Home: NextPage = () => {
           </div>
           <div className="lg:basis-1/12 md:basis-1/4 ml-5">
             <p>Gender</p>
-            <select name="gender" id="gender" className="select-gender">
+            <select
+              name="gender"
+              id="gender"
+              className="select-gender"
+              value={select}
+              onChange={(e) => handleFilterGender(e.target.value)}
+            >
               <option value="male">male</option>
               <option value="female">female</option>
             </select>
