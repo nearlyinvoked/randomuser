@@ -40,3 +40,13 @@ tr:nth-child(even) {
 td {
   padding: 10px 10px;
 }
+
+.btn-search {
+  border: 1px solid white;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: rgb(14 165 233);
+}
+.btn-search > svg {
+  color: white;
+}
