@@ -13,3 +13,30 @@ body {
 * {
   box-sizing: border-box;
 }
+
+input[type="text"] {
+  border: 1px solid gray;
+  width: 100%;
+  padding: 5px 5px;
+  box-sizing: border-box;
+}
+
+.btn-filter {
+  border: 1px solid gray;
+  padding: 5px 5px;
+}
+
+.select-gender {
+  width: 100%;
+  border: 1px solid gray;
+  padding: 6px 5px;
+  box-sizing: border-box;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+td {
+  padding: 10px 10px;
+}
