@@ -1,10 +1,13 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Hello my name is Kevin Reynaldo Laurens, this is my submission for Ajaib Web Engineer Test. You can try it on https://randomuser-table.vercel.app/ or you can try it on local with instruction below.
 
 ## Getting Started
+
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 First, run the development server:
 
 ```bash
+npm install
 npm run dev
 # or
 yarn dev
