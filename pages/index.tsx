@@ -7,6 +7,7 @@ import Moment from "react-moment";
 import { Data } from "./api/users";
 import IconSort from "../components/IconSort";
 import IconSearch from "../components/IconSearch";
+import Pagination from "../components/Pagination";
 
 const Home: NextPage = () => {
   const [users, setUsers] = useState<Data[]>([]);
@@ -14,7 +15,7 @@ const Home: NextPage = () => {
   const [filterData, setFilterData] = useState<Data[]>([]);
   const [filter, setFilter] = useState<boolean>(false);
 
-  const [currentPage, setcurrentPage] = useState<string>("1");
+  const [currentPage, setcurrentPage] = useState<number>(1);
 
   const [select, setSelect] = useState("");
 
@@ -44,7 +45,7 @@ const Home: NextPage = () => {
     setFilterData(filterGender);
   };
 
-  const handleGetPages = async (page: string) => {
+  const handleGetPages = async (page: number) => {
     setcurrentPage(page);
     const response = await axios.get(`/api/users/pages/${page}`);
     setUsers(response.data.results);
@@ -185,32 +186,10 @@ const Home: NextPage = () => {
         {filter ? (
           ""
         ) : (
-          <div className="pagination flex justify-end mt-5">
-            <button
-              className={
-                currentPage == "1" ? "active-page mx-1" : "btn-page mx-1"
-              }
-              onClick={() => handleGetPages("1")}
-            >
-              1
-            </button>
-            <button
-              className={
-                currentPage == "2" ? "active-page mx-1" : "btn-page mx-1"
-              }
-              onClick={() => handleGetPages("2")}
-            >
-              2
-            </button>
-            <button
-              className={
-                currentPage == "3" ? "active-page mx-1" : "btn-page mx-1"
-              }
-              onClick={() => handleGetPages("3")}
-            >
-              3
-            </button>
-          </div>
+          <Pagination
+            currentPage={currentPage}
+            handleGetPages={handleGetPages}
+          />
         )}
       </main>
     </div>
