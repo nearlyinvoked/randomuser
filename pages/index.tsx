@@ -26,9 +26,10 @@ const Home: NextPage = () => {
     let filterUsername = users.filter((item) =>
       item.login.username.toLowerCase().includes(search.toLowerCase())
     );
-    let filterName = users.filter((item) =>
-      item.name.first.toLowerCase().includes(search.toLowerCase())
-    );
+    let filterName = users.filter((item) => {
+      let name = item.name.first + " " + item.name.last;
+      name.toLowerCase().includes(search.toLowerCase());
+    });
     let filterEmail = users.filter((item) =>
       item.email.toLowerCase().includes(search.toLowerCase())
     );
