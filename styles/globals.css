@@ -65,3 +65,7 @@ td {
   border: 2px solid gray;
   color: gray;
 }
+
+.loading {
+  height: 500px;
+}
