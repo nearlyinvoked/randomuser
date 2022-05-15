@@ -25,8 +25,9 @@ export default async function handler(
   res: NextApiResponse<Data>
 ) {
   try {
+    const { pageNumber } = req.query;
     const response: any = await axios.get<Data[]>(
-      "https://randomuser.me/api/?results=10&seed=foobar"
+      `https://randomuser.me/api/?page=${pageNumber}&results=10&seed=foobar`
     );
     res.status(200).json(response.data);
   } catch (error: any) {

@@ -14,6 +14,8 @@ const Home: NextPage = () => {
   const [filterData, setFilterData] = useState<Data[]>([]);
   const [filter, setFilter] = useState<boolean>(false);
 
+  const [currentPage, setcurrentPage] = useState<string>("1");
+
   const [select, setSelect] = useState("");
 
   const [search, setSearch] = useState<string>("");
@@ -40,6 +42,12 @@ const Home: NextPage = () => {
     setFilter(true);
     let filterGender = users.filter((item) => item.gender == gender);
     setFilterData(filterGender);
+  };
+
+  const handleGetPages = async (page: string) => {
+    setcurrentPage(page);
+    const response = await axios.get(`/api/users/pages/${page}`);
+    setUsers(response.data.results);
   };
 
   const handleResetFilter = () => {
@@ -110,7 +118,7 @@ const Home: NextPage = () => {
           </div>
         </form>
 
-        <table className="table-auto">
+        <table className="table-fixed" style={{ width: "100%" }}>
           <thead>
             <tr>
               <th className="bg-gray-300">
@@ -139,11 +147,13 @@ const Home: NextPage = () => {
             <tbody>
               {filterData.map((item) => (
                 <tr key={item.login.username}>
-                  <td>{item.login.username}</td>
-                  <td>{item.name.first + " " + item.name.last}</td>
-                  <td>{item.email}</td>
-                  <td>{item.gender}</td>
-                  <td>
+                  <td className="text-center">{item.login.username}</td>
+                  <td className="text-center">
+                    {item.name.first + " " + item.name.last}
+                  </td>
+                  <td className="text-center">{item.email}</td>
+                  <td className="text-center">{item.gender}</td>
+                  <td className="text-center">
                     <Moment format="DD/MM/YYYY HH:mm">
                       {item.registered.date}
                     </Moment>
@@ -155,11 +165,13 @@ const Home: NextPage = () => {
             <tbody>
               {users.map((item) => (
                 <tr key={item.login.username}>
-                  <td>{item.login.username}</td>
-                  <td>{item.name.first + " " + item.name.last}</td>
-                  <td>{item.email}</td>
-                  <td>{item.gender}</td>
-                  <td>
+                  <td className="text-center">{item.login.username}</td>
+                  <td className="text-center">
+                    {item.name.first + " " + item.name.last}
+                  </td>
+                  <td className="text-center">{item.email}</td>
+                  <td className="text-center">{item.gender}</td>
+                  <td className="text-center">
                     <Moment format="DD/MM/YYYY HH:mm">
                       {item.registered.date}
                     </Moment>
@@ -169,6 +181,37 @@ const Home: NextPage = () => {
             </tbody>
           )}
         </table>
+
+        {filter ? (
+          ""
+        ) : (
+          <div className="pagination flex justify-end mt-5">
+            <button
+              className={
+                currentPage == "1" ? "active-page mx-1" : "btn-page mx-1"
+              }
+              onClick={() => handleGetPages("1")}
+            >
+              1
+            </button>
+            <button
+              className={
+                currentPage == "2" ? "active-page mx-1" : "btn-page mx-1"
+              }
+              onClick={() => handleGetPages("2")}
+            >
+              2
+            </button>
+            <button
+              className={
+                currentPage == "3" ? "active-page mx-1" : "btn-page mx-1"
+              }
+              onClick={() => handleGetPages("3")}
+            >
+              3
+            </button>
+          </div>
+        )}
       </main>
     </div>
   );

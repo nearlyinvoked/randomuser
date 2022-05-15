@@ -50,3 +50,13 @@ td {
 .btn-search > svg {
   color: white;
 }
+.btn-page {
+  border: 2px solid gray;
+  padding: 1px 6px;
+}
+
+.active-page {
+  border: 2px solid rgb(14 165 233);
+  padding: 1px 6px;
+  color: rgb(14 165 233);
+}
