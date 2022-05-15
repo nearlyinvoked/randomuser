@@ -21,6 +21,7 @@ const Home: NextPage = () => {
 
   const [search, setSearch] = useState<string>("");
 
+  // Filter by Search, Gender
   const handleSearch = () => {
     setFilter(true);
     let filterUsername = users.filter((item) =>
@@ -46,12 +47,44 @@ const Home: NextPage = () => {
     setFilterData(filterGender);
   };
 
+  // Pagination
   const handleGetPages = async (page: number) => {
+    setFilter(false);
     setcurrentPage(page);
     const response = await axios.get(`/api/users/pages/${page}`);
     setUsers(response.data.results);
   };
 
+  // Sort Column
+  const sortUsername = () => {
+    setUsers((prevState) => [
+      ...prevState.sort((a: Data, b: Data) =>
+        a.login.username.localeCompare(b.login.username)
+      ),
+    ]);
+  };
+
+  const sortName = () => {
+    setUsers((prevState) => [
+      ...prevState.sort((a: Data, b: Data) =>
+        a.name.first.localeCompare(b.name.first)
+      ),
+    ]);
+  };
+
+  const sortEmail = () => {
+    setUsers((prevState) => [
+      ...prevState.sort((a: Data, b: Data) => a.email.localeCompare(b.email)),
+    ]);
+  };
+
+  const sortGender = () => {
+    setUsers((prevState) => [
+      ...prevState.sort((a: Data, b: Data) => a.gender.localeCompare(b.gender)),
+    ]);
+  };
+
+  // Reset Filter
   const handleResetFilter = () => {
     setFilter(false);
   };
@@ -125,23 +158,28 @@ const Home: NextPage = () => {
             <tr>
               <th className="bg-gray-300">
                 Username{" "}
-                <button>
+                <button type="button" onClick={() => sortUsername()}>
                   <IconSort />
                 </button>
               </th>
               <th className="bg-gray-300">
                 Name{" "}
-                <button>
+                <button type="button" onClick={() => sortName()}>
                   <IconSort />
                 </button>
               </th>
               <th className="bg-gray-300">
                 Email{" "}
-                <button>
+                <button type="button" onClick={() => sortEmail()}>
                   <IconSort />
                 </button>
               </th>
-              <th className="bg-gray-300">Gender</th>
+              <th className="bg-gray-300">
+                Gender{" "}
+                <button type="button" onClick={() => sortGender()}>
+                  <IconSort />
+                </button>
+              </th>
               <th className="bg-gray-300">Date</th>
             </tr>
           </thead>
@@ -184,14 +222,7 @@ const Home: NextPage = () => {
           )}
         </table>
 
-        {filter ? (
-          ""
-        ) : (
-          <Pagination
-            currentPage={currentPage}
-            handleGetPages={handleGetPages}
-          />
-        )}
+        <Pagination currentPage={currentPage} handleGetPages={handleGetPages} />
       </main>
     </div>
   );
