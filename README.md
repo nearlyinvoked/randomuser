@@ -3,7 +3,7 @@
 Hello my name is Kevin Reynaldo Laurens, this is my submission for Ajaib Web Engineer Test. You can try it here [Random User Table by Kevin](https://randomuser-table.vercel.app/) or you can try it on local with instruction below.
 
 This Project created with create-next-app with Typescript template. There is some small package that i install for this project like axios, moment, and tailwindcss.
-I don't use redux for state management even though i think it's better for better for readability and split the state from the main component itself.
+I don't use redux for state management in this project because the state in relative simple and the action is not really complex, even though i think it's better to use redux for better for readability and split the state from the main component itself.
 
 I create a pretty basic simple UI for this project using tailwindcss, there is a lot of UI kit like Material-UI that i generally use but the package is pretty big and there is already built-in function for the datatable which is not good because you guys asked for the table function to be coded from scratch
 
